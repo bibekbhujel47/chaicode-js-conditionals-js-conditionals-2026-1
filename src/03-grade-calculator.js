@@ -16,7 +16,7 @@
  * Rules:
  *   - Check validity FIRST: if the original score is less than 0
  *     or greater than 100, return "INVALID"
- *   - If hasExtraCredit is true, add 5 points AFTER validation
+ *   - If  true,hasExtraCredit is add 5 points AFTER validation
  *     (cap the result at 100)
  *   - Then determine the letter grade from the adjusted score
  *
@@ -26,4 +26,27 @@
  */
 export function calculateGrade(score, hasExtraCredit) {
   // Your code here
+  if (score < 0 || score > 100) { return "INVALID";}
+
+  if (score <= 95) {
+  score = hasExtraCredit ? score += 5 : score
+  }
+
+  let grade = '';
+  if (score < 60) {
+    grade = "F";
+  }
+  else if(score < 70) {
+    grade = "D";
+  }
+  else if (score < 80) {
+    grade = "C";
+  }
+  else if (score < 90) {
+    grade = "B";
+  } 
+  else if (score <= 100) {
+    grade = "A";
+  }
+  return grade;
 }
