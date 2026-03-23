@@ -30,6 +30,57 @@
  * @param {number} temperature - Current temperature in Celsius
  * @returns {{ season: string, activity: string } | null}
  */
+const  SEASON = {
+  Winter: "Winter",
+  Spring: "Spring",
+  Summer: "Summer",
+  Autumn: "Autumn"
+}
+const monthToSeason = {
+  12: SEASON.Winter,
+  1: SEASON.Winter,
+  2: SEASON.Winter,
+  3: SEASON.Spring,
+  4: SEASON.Spring,
+  5: SEASON.Spring,
+  6: SEASON.Summer,
+  7: SEASON.Summer,
+  8: SEASON.Summer,
+  9: SEASON.Autumn,
+  10: SEASON.Autumn,
+  11: SEASON.Autumn
+}
+
+const ACTIVITIES = {
+  Winter: {
+    cold: "ice skating",   // temperature >= 0
+    freezing: "skiing"     // temperature < 0
+  },
+  Spring: {
+    warm: "hiking",        // temperature > 20
+    mild: "museum visit"   // temperature <= 20
+  },
+  Summer: {
+    hot: "swimming",       // temperature > 35
+    moderate: "cycling"    // temperature <= 35
+  },
+  Autumn: {
+    warm: "nature walk",   // temperature > 15
+    cool: "reading at a cafe" // temperature <= 15
+  }
+};
 export function getSeasonActivity(month, temperature) {
-  // Your code here
+  const isMonthInRange = month >= 1 && month <= 12
+   if (!isMonthInRange) { return null}
+   const season = monthToSeason[month]
+
+ let activity = null
+ switch(season) {
+  case SEASON.Winter: activity = (temperature >= 0) ? ACTIVITIES.Winter.cold: ACTIVITIES.Winter.freezing; break;
+  case SEASON.Spring: activity = (temperature) > 20 ? ACTIVITIES.Spring.warm: ACTIVITIES.Spring.mild; break;
+  case SEASON.Summer: activity = (temperature > 35) ? ACTIVITIES.Summer.hot: ACTIVITIES.Summer.moderate;break;
+  case SEASON.Autumn: activity = (temperature > 15) ? ACTIVITIES.Autumn.warm: ACTIVITIES.Autumn.cool; break;
+ }
+
+ return {season, activity}
 }
